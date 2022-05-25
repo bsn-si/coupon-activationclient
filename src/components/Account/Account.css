@@ -1,0 +1,62 @@
+.account {
+  border-bottom: 1px solid rgba(0,0,0, 0.05);
+  justify-content: space-between;
+  transition: all 0.2s ease;
+  align-items: center;
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+  padding: 0 14px;
+  display: flex;
+  height: 70px;
+}
+
+.account.active::before {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+
+  background-color: #4CAF50;
+  border-radius: 50%;
+  position: absolute;
+  font-size: 14px;
+  color: #fff;
+  content: "✔";
+  height: 20px;
+  width: 20px;
+  right: 4px;
+  top: 4px;
+}
+
+.account:hover,
+.account.active {
+  background-color: rgba(0,0,0, 0.05);
+}
+
+.account .side {
+  flex-direction: column;
+  max-width: 70%;
+  display: flex;
+}
+
+.account .name {
+  color: rgba(0,0,0, 0.8);
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.account .address {
+  color: rgba(0,0,0, 0.5);
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+  overflow: hidden;
+  font-weight: 500;
+  font-size: 10px;
+}
+
+.account .balance {
+  color: rgba(0,0,0, 0.9);
+  font-weight: 700;
+  font-size: 12px;
+}

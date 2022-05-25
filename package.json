@@ -1,0 +1,60 @@
+{
+  "name": "activation-client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@polkadot/api": "^8.4.2",
+    "@polkadot/extension-dapp": "^0.43.2",
+    "@polkadot/extension-inject": "^0.43.2",
+    "@polkadot/keyring": "^9.2.1",
+    "@polkadot/types": "^8.4.2",
+    "@polkadot/util": "^9.2.1",
+    "@polkadot/util-crypto": "^9.2.1",
+    "add": "^2.0.6",
+    "bn.js": "^5.2.0",
+    "clsx": "^1.1.1",
+    "framer-motion": "^6.3.3",
+    "ocex-api": "bsn-si/ocex-api",
+    "ocex-coupon-signature-web": "https://gitpkg.now.sh/bsn-si/ocex-coupon-signature/pkg_web?fd40f08",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "reseter.css": "^2.0.0",
+    "yarn": "^1.22.18"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "style:fix": "prettier --config .prettierrc.js 'src/**/*.{ts,tsx}' --write",
+    "lint:fix": "eslint '*/**/*.{ts,tsx}' --quiet --fix",
+    "fix:all": "npm run style:fix && npm run lint:fix"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.2.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.1",
+    "@types/node": "^16.11.36",
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.4",
+    "autoprefixer": "^10.4.7",
+    "eslint": "^8.16.0",
+    "postcss": "^8.4.14",
+    "prettier": "^2.6.2",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.6.4"
+  }
+}

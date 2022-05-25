@@ -1,0 +1,9 @@
+.step.welcome {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+.step.welcome .button {
+  margin-top: 30px;
+}
