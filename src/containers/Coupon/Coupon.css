@@ -12,53 +12,19 @@
 .step.coupon .form {
   background-color: #fff;
   flex-direction: column;
+  margin: 30px 0 35px 0;
   border-radius: 8px;
   overflow: hidden;
-  margin: 50px 0;
   display: flex;
   width: 400px;
 }
 
-.step.coupon .form .coupon {
-  align-items: center;
-  display: flex;
-  height: 70px;
+.step.coupon .error.message {
+  margin-bottom: 25px;
 }
 
-.step.coupon .form .coupon .icon {
-  margin: 0 14px 0 16px;
-  min-width: 30px;
-  height: 30px;
-  width: 30px;
-}
-
-.step.coupon .form .coupon input {
-  border-top-left-radius: 10px;
-  transition: all 0.4s ease;
-  overflow: hidden;
-  padding: 0 14px;
-  font-size: 14px;
-  outline: none;
-  border: none;
-  height: 70px;
-  flex: 1;
-}
-
-.step.coupon .form .coupon input::placeholder {
-  color: rgba(0,0,0, 0.65);
-}
-
-.step.coupon .form .coupon input:focus {
-  background-color: rgba(0,0,0, 0.05);
-}
-
-.step.coupon .form .coupon.invalid input,
-.step.coupon .form .coupon.invalid input:focus,
-.step.coupon .form .coupon.invalid input::placeholder {
-  background-color: rgba(244, 67, 54, 0.2);
-  color: #F44336;
-}
-
-.step.coupon .form .coupon.invalid .icon {
-  fill: #F44336;
+@media screen and (max-width: 768px) {
+  .step.coupon .form {
+    width: 90%;
+  }
 }

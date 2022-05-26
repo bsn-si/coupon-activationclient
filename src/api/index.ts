@@ -1,5 +1,5 @@
 import { web3Accounts, web3Enable, web3FromAddress } from "@polkadot/extension-dapp"
-// import { get_coupon_signature } from "ocex-coupon-signature-web"
+import { get_coupon_signature } from "ocex-coupon-signature-web"
 import { WsProvider, ApiPromise } from "@polkadot/api"
 import { ApiBase } from "@polkadot/api/base"
 import { Coupon, Ocex } from "ocex-api"
@@ -79,7 +79,7 @@ export class API {
 
     const { signer } = await web3FromAddress(receiver)
     const contract = await Ocex.fromAddress(this.client, [receiver, signer], address)
-    // contract.get_coupon_signature = get_coupon_signature
+    contract.get_coupon_signature = get_coupon_signature
     
     const coupon = new Coupon(couponSecret)
     const result = await contract.activateCoupon(coupon, receiver)

@@ -1,0 +1,9 @@
+.step.finish {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+.step.finish .button {
+  margin-top: 30px;
+}

@@ -4,6 +4,7 @@ import BN from "bn.js"
 import { API } from "./api"
 
 export type EnrichedAccount = InjectedAccountWithMeta & { balance: BN }
+type SetState<T> = React.Dispatch<React.SetStateAction<T>>
 
 export enum Step {
   // Welcome message
@@ -18,12 +19,14 @@ export enum Step {
 
 export interface StepProps {
   account?: EnrichedAccount
+  contract?: string
   coupon?: string
+  
+  setAccount: SetState<EnrichedAccount | undefined>
+  setContract: SetState<string | undefined>
+  setCoupon: SetState<string | undefined>
+  setStep: SetState<Step>
+  
   step: Step
-
-  setAccount: React.Dispatch<React.SetStateAction<EnrichedAccount | undefined>>
-  setCoupon: React.Dispatch<React.SetStateAction<string | undefined>>
-  setStep: React.Dispatch<React.SetStateAction<Step>>
-
   api: API
 }

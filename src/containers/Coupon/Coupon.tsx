@@ -1,51 +1,48 @@
-import { useCallback, useEffect, useState } from "react"
-import { BalanceGrade, fmtBalance } from "ocex-api"
-import { Keyring } from "@polkadot/keyring"
+import { decodeAddress } from "@polkadot/keyring"
+import { useCallback, useState } from "react"
+import { u8aToHex } from "@polkadot/util"
 import { motion } from "framer-motion"
-import BN from "bn.js"
-import cx from "clsx"
+import { ErrorCode } from "ocex-api"
 
+import { Account, CouponInput } from "../../components"
 import { Step, StepProps } from "../../models"
-import { Account } from "../../components"
-import { GiftIcon } from "./GiftIcon"
 import "./Coupon.css"
 
-const keyring = new Keyring({ type: "sr25519" })
+const ERROR_MESSAGES = {
+  [ErrorCode.InvalidParseCouponSignature]: "Invalid parse coupon signature",
+  [ErrorCode.ContractBalanceNotEnough]: "Contract balance not enough",
+  [ErrorCode.VerifySignatureFailed]: "Verify signature failed",
+  [ErrorCode.CouponAlreadyBurned]: "Coupon already burned",
+  [ErrorCode.CouponAlreadyExists]: "Coupon already exists",
+  [ErrorCode.InvalidParseCoupon]: "Invalid parse coupon",
+  [ErrorCode.CouponNotFound]: "Coupon not found",
+  [ErrorCode.TransferFailed]: "Transfer failed",
+  [ErrorCode.AccessOwner]: "Access owner",
+}
+
 const CONTRACT_ADDRESS = "0xfe53754a8ca38a390d9096a30db04e341ecf85ea8f1d9544b71e564494fa7f38"
 
 export function Coupon({ setCoupon, setStep, account, coupon, api }: StepProps) {
-  const [secretIsInvalid, setSecretIsInvalid] = useState(false)
   const [error, setError] = useState<string>()
-  const [secret, setSecret] = useState("")
 
   const onActivateCoupon = useCallback(async () => {
     if (account && coupon) {
       try {
-        const result = await api.activateCoupon(CONTRACT_ADDRESS, account.address, coupon)
-        console.log(result)
+        const receiver = u8aToHex(decodeAddress(account.address))
+        const isActivated = await api.activateCoupon(CONTRACT_ADDRESS, receiver, coupon)
+
+        if (isActivated) {
+          setStep(Step.Finish)
+        }
       } catch (error: any) {
-        console.log(error)
+        if (error.data && ErrorCode[error.data]) {
+          setError(ERROR_MESSAGES[error.data])
+        } else {
+          setError(error.message)
+        }
       }
     }
   }, [api, account, coupon])
-
-  const onSecretChange = useCallback(
-    (event: any) => {
-      const { value } = event.target
-
-      try {
-        setSecret(value)
-
-        // Simple validation
-        keyring.addFromUri(value)
-        setSecretIsInvalid(false)
-        setCoupon(value)
-      } catch (error) {
-        setSecretIsInvalid(true)
-      }
-    },
-    [setCoupon],
-  )
 
   return (
     <motion.div
@@ -60,21 +57,11 @@ export function Coupon({ setCoupon, setStep, account, coupon, api }: StepProps) 
       </div>
 
       <div className="form">
-        <Account {...(account as any)} />
-
-        <div className={cx("coupon", { invalid: secretIsInvalid })}>
-          <GiftIcon className="icon" />
-          
-          <input
-            placeholder="Please enter you coupon key"
-            onChange={onSecretChange}
-            value={secret}
-            name="coupon"
-          />
-        </div>
+        <Account {...account} />
+        <CouponInput coupon={coupon} setCoupon={setCoupon} />
       </div>
 
-      {error && <div className="error">{error}</div>}
+      {error && <div className="error message">{error}</div>}
 
       {coupon && (
         <button className="button glow" onClick={onActivateCoupon}>

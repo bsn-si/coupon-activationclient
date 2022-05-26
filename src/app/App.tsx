@@ -4,6 +4,7 @@ import cx from "clsx"
 
 import { EnrichedAccount, Step, StepProps } from "../models"
 import * as containers from "../containers"
+import { CONTRACT, RPC_URL } from "../utils"
 import { API } from "../api"
 import "./App.css"
 
@@ -20,8 +21,9 @@ const forms = {
 const DEFAULT_DEV_RPC_URL = "127.0.0.1:9944"
 
 export function App() {
-  const api = useMemo(() => new API(DEFAULT_DEV_RPC_URL), [])
+  const api = useMemo(() => new API(RPC_URL || DEFAULT_DEV_RPC_URL), [])
 
+  const [contract, setContract] = useState<string | undefined>(CONTRACT)
   const [account, setAccount] = useState<EnrichedAccount>()
   const [step, setStep] = useState(Step.Welcome)
   const [coupon, setCoupon] = useState<string>()
@@ -29,10 +31,12 @@ export function App() {
   const CurrentStep = forms[step]
 
   const stepProps: StepProps = {
+    setContract,
     setAccount,
     setCoupon,
     setStep,
 
+    contract,
     account,
     coupon,
     step,
@@ -43,7 +47,7 @@ export function App() {
     <div className={cx("app", `step-${step}`)}>
       <motion.img src={gift} animate={assign({
         // @Todo
-      }, step === Step.Welcome ? {
+      }, [Step.Welcome, Step.Finish].includes(step) ? {
         height: 300,
         width: 300,
       } : {

@@ -29,7 +29,7 @@ export function Welcome({ api, setStep }: StepProps) {
         <h4 className="subtitle">Here you can activate you coupon</h4>
       </div>
 
-      {error && <div className="error">{error}</div>}
+      {error && <div className="error message">{error}</div>}
 
       <button className="button glow" onClick={onGoCoupon}>
         Continue

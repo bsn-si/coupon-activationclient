@@ -2,6 +2,15 @@
   "name": "activation-client",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "style:fix": "prettier --config .prettierrc.js 'src/**/*.{ts,tsx}' --write",
+    "lint:fix": "eslint '*/**/*.{ts,tsx}' --quiet --fix",
+    "fix:all": "npm run style:fix && npm run lint:fix",
+    "start": "NODE_ENV=development webpack serve --hot",
+    "build:stage": "env-cmd -f .env.stage webpack",
+    "build:prod": "env-cmd -f .env.prod webpack",
+    "build": "webpack"
+  },
   "dependencies": {
     "@polkadot/api": "^8.4.2",
     "@polkadot/extension-dapp": "^0.43.2",
@@ -14,47 +23,33 @@
     "bn.js": "^5.2.0",
     "clsx": "^1.1.1",
     "framer-motion": "^6.3.3",
-    "ocex-api": "bsn-si/ocex-api",
+    "ocex-api": "https://gitpkg.now.sh/bsn-si/ocex-api?d763876",
     "ocex-coupon-signature-web": "https://gitpkg.now.sh/bsn-si/ocex-coupon-signature/pkg_web?fd40f08",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "reseter.css": "^2.0.0",
     "yarn": "^1.22.18"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "style:fix": "prettier --config .prettierrc.js 'src/**/*.{ts,tsx}' --write",
-    "lint:fix": "eslint '*/**/*.{ts,tsx}' --quiet --fix",
-    "fix:all": "npm run style:fix && npm run lint:fix"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.2.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.1",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "@types/node": "^16.11.36",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.4",
-    "autoprefixer": "^10.4.7",
+    "css-loader": "^6.7.1",
+    "dotenv": "^16.0.1",
     "eslint": "^8.16.0",
+    "fork-ts-checker-webpack-plugin": "^7.2.11",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.0",
     "postcss": "^8.4.14",
+    "postcss-loader": "^7.0.0",
     "prettier": "^2.6.2",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.6.4"
+    "react-refresh-typescript": "^2.0.4",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.3.0",
+    "typescript": "^4.6.4",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
   }
 }

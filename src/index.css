@@ -28,6 +28,20 @@ body {
   display: flex;
 }
 
+@media screen and (max-width: 768px) {
+  .app img {
+    margin-top: -60px;
+  }
+  
+  .app .header .title {
+    font-size: 28px;
+  }
+
+  .app .header .subtitle {
+    font-size: 18px;
+  }
+}
+
 /* Global title styles */
 .header {
   flex-direction: column;
@@ -55,16 +69,19 @@ body {
 
 /* Button */
 .button {
+  transition: all 0.3s ease;
   background-color: #fff;
   text-transform: uppercase;
   color: rgba(0,0,0, 0.7);
   position: relative;
+  user-select: none;
   text-align: center;
   font-weight: 500;
   font-size: 16px;
 
   border-radius: 8px;
   padding: 12px 28px;
+  cursor: pointer;
   outline: none;
   border: none;
   z-index: 10;
@@ -89,7 +106,19 @@ body {
   content: '';
 }
 
+.button:hover,
+.button.glow:hover::after {
+  background-color: #EEEEEE;
+  box-shadow: inset 0px 0px 6px rgba(0,0,0, 0.1);
+}
+
+/* .button.glow:hover::before {
+  background: linear-gradient(45deg, #7a00ff, #F44336, #388E3C, #E91E63);
+  animation: glowing 20s linear infinite;
+} */
+
 .glow:after {
+  transition: all 0.3s ease;
   z-index: -1;
   content: '';
   position: absolute;
@@ -108,14 +137,14 @@ body {
 }
 
 /* Error Alert */
-.error {
-  background-color: rgba(244, 67, 54, 0.5);
+.error.message {
+  background-color: #E53935;
   padding: 12px 14px;
   margin: 10px 0;
   
   border-radius: 6px;
   text-align: center;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
   color: #FFF;
 }

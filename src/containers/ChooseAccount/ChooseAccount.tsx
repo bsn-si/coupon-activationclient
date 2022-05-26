@@ -71,7 +71,7 @@ export function ChooseAccount({
         })}
       </div>
 
-      {error && <div className="error">{error}</div>}
+      {error && <div className="error message">{error}</div>}
 
       {currentAccount && (
         <button className="button glow" onClick={onGoCoupon}>
