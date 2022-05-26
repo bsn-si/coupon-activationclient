@@ -21,12 +21,12 @@ export interface StepProps {
   account?: EnrichedAccount
   contract?: string
   coupon?: string
-  
+
   setAccount: SetState<EnrichedAccount | undefined>
   setContract: SetState<string | undefined>
   setCoupon: SetState<string | undefined>
   setStep: SetState<Step>
-  
+
   step: Step
   api: API
 }

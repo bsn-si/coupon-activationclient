@@ -4,6 +4,10 @@
   display: flex;
 }
 
+.step.welcome .rpc-url {
+  margin-top: 20px;
+}
+
 .step.welcome .button {
-  margin-top: 30px;
+  margin-top: 40px;
 }

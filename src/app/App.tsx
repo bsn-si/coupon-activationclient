@@ -3,8 +3,8 @@ import { useMemo, useState } from "react"
 import cx from "clsx"
 
 import { EnrichedAccount, Step, StepProps } from "../models"
-import * as containers from "../containers"
 import { CONTRACT, RPC_URL } from "../utils"
+import * as containers from "../containers"
 import { API } from "../api"
 import "./App.css"
 
@@ -18,10 +18,8 @@ const forms = {
   [Step.Finish]: containers.Finish,
 }
 
-const DEFAULT_DEV_RPC_URL = "127.0.0.1:9944"
-
 export function App() {
-  const api = useMemo(() => new API(RPC_URL || DEFAULT_DEV_RPC_URL), [])
+  const api = useMemo(() => new API(RPC_URL), [])
 
   const [contract, setContract] = useState<string | undefined>(CONTRACT)
   const [account, setAccount] = useState<EnrichedAccount>()
@@ -45,15 +43,23 @@ export function App() {
 
   return (
     <div className={cx("app", `step-${step}`)}>
-      <motion.img src={gift} animate={assign({
-        // @Todo
-      }, [Step.Welcome, Step.Finish].includes(step) ? {
-        height: 300,
-        width: 300,
-      } : {
-        height: 150,
-        width: 150,
-      })} />
+      <motion.img
+        src={gift}
+        animate={assign(
+          {
+            // @Todo
+          },
+          [Step.Welcome, Step.Finish].includes(step)
+            ? {
+                height: 300,
+                width: 300,
+              }
+            : {
+                height: 150,
+                width: 150,
+              },
+        )}
+      />
 
       <AnimatePresence>
         <CurrentStep {...stepProps} />

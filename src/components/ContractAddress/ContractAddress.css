@@ -1,0 +1,96 @@
+.contract-address {
+  border-radius: 5px 16px 5px 16px;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  height: 70px;
+  width: 235px;
+}
+
+.contract-address.edit {
+  width: 300px;
+}
+
+.contract-address .icon {
+  justify-content: center;
+  align-items: center;  
+  display: flex;
+  width: 60px;
+}
+
+.contract-address .icon svg {
+  width: 26px;
+}
+
+/* Meta */
+.contract-address .meta {
+  transition: all 0.3s ease;
+  width: calc(100% - 60px);
+  flex-direction: column;
+  padding-right: 24px;
+  padding-left: 0px;
+  cursor: pointer;
+  display: flex;
+}
+
+.contract-address .meta .label {
+  font-weight: 400;
+  font-size: 12px;
+  color: #000;
+  opacity: 0.65;
+}
+
+.contract-address .meta .address {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 6px;
+  color: #000;
+}
+
+.contract-address .error {
+  position: absolute;
+  font-weight: 500;
+  font-size: 10px;
+  color: #F44336;
+  bottom: 7px;
+  left: 74px;
+}
+
+/* Input */
+.contract-address input {
+  background-color: transparent;
+  transition: all 0.4s ease;
+  font-weight: 500;
+  overflow: hidden;
+  padding: 0 14px;
+  font-size: 14px;
+  min-width: auto;
+  outline: none;
+  border: none;
+  height: 70px;
+  flex: 1;
+}
+
+.contract-address input::placeholder {
+  color: rgba(0,0,0, 0.65);
+}
+
+.contract-address input:focus {
+  background-color: rgba(0,0,0, 0.05);
+}
+
+.contract-address.invalid input,
+.contract-address.invalid input:focus,
+.contract-address.invalid input::placeholder {
+  background-color: rgba(244, 67, 54, 0.2);
+  color: #F44336;
+}
+
+.contract-address.invalid .icon {
+  fill: #F44336;
+}

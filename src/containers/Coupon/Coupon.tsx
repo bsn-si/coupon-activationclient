@@ -3,8 +3,9 @@ import { useCallback, useState } from "react"
 import { u8aToHex } from "@polkadot/util"
 import { motion } from "framer-motion"
 import { ErrorCode } from "ocex-api"
+import cx from "clsx"
 
-import { Account, CouponInput } from "../../components"
+import { Account, ContractAddress, CouponSecret, Spinner } from "../../components"
 import { Step, StepProps } from "../../models"
 import "./Coupon.css"
 
@@ -20,16 +21,25 @@ const ERROR_MESSAGES = {
   [ErrorCode.AccessOwner]: "Access owner",
 }
 
-const CONTRACT_ADDRESS = "0xfe53754a8ca38a390d9096a30db04e341ecf85ea8f1d9544b71e564494fa7f38"
-
-export function Coupon({ setCoupon, setStep, account, coupon, api }: StepProps) {
+export function Coupon({
+  setCoupon,
+  setStep,
+  setContract,
+  account,
+  coupon,
+  contract,
+  api,
+}: StepProps) {
   const [error, setError] = useState<string>()
+  const [loading, setLoading] = useState(false)
 
   const onActivateCoupon = useCallback(async () => {
-    if (account && coupon) {
+    if (account && coupon && contract) {
+      setLoading(true)
+
       try {
         const receiver = u8aToHex(decodeAddress(account.address))
-        const isActivated = await api.activateCoupon(CONTRACT_ADDRESS, receiver, coupon)
+        const isActivated = await api.activateCoupon(contract, receiver, coupon)
 
         if (isActivated) {
           setStep(Step.Finish)
@@ -40,6 +50,8 @@ export function Coupon({ setCoupon, setStep, account, coupon, api }: StepProps) 
         } else {
           setError(error.message)
         }
+      } finally {
+        setLoading(false)
       }
     }
   }, [api, account, coupon])
@@ -57,8 +69,17 @@ export function Coupon({ setCoupon, setStep, account, coupon, api }: StepProps) 
       </div>
 
       <div className="form">
-        <Account {...account} />
-        <CouponInput coupon={coupon} setCoupon={setCoupon} />
+        {loading && (
+          <div className="loading">
+            <Spinner />
+          </div>
+        )}
+
+        <div className={cx("inputs", { loading })}>
+          <Account {...account} />
+          <ContractAddress contract={contract} setContract={setContract} />
+          <CouponSecret coupon={coupon} setCoupon={setCoupon} />
+        </div>
       </div>
 
       {error && <div className="error message">{error}</div>}

@@ -13,10 +13,46 @@
   background-color: #fff;
   flex-direction: column;
   margin: 30px 0 35px 0;
+  position: relative;
   border-radius: 8px;
   overflow: hidden;
   display: flex;
   width: 400px;
+}
+
+.step.coupon .form .inputs {
+  flex-direction: column;
+  display: flex;
+}
+
+.step.coupon .form .inputs.loading {
+  filter: blur(10px);
+}
+
+.step.coupon .form .loading:not(.inputs) {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  
+  background-color: rgba(0,0,0,0.05);
+  position: absolute;
+  z-index: 100;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+.step.coupon .form .contract-address {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  width: 100% !important;
+  border-radius: 0;
+}
+
+.step.coupon .form .coupon-secret {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  width: 100% !important;
+  border-radius: 0;
 }
 
 .step.coupon .error.message {

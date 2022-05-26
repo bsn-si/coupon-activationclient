@@ -17,10 +17,24 @@ export function ChooseAccount({
 
   const getAccounts = useCallback(async () => {
     try {
-      await api.requestAccess()
+      const extensions = await api.requestAccess()
 
-      const accounts = await api.accounts()
-      setAccounts(accounts)
+      if (extensions.length > 0) {
+        const accounts = await api.accounts()
+
+        if (accounts.length > 0) {
+          setAccounts(accounts)
+        } else {
+          // prettier-ignore
+          setError(
+            "You don't have allowed accounts on extension." +
+            "\n" +
+            "Install extension, or allow dapp for this site.",
+          )
+        }
+      } else {
+        setError("No extension installed, or the user\ndid not accept the authorization")
+      }
     } catch (error: any) {
       console.error(error)
       setError(error.message)
@@ -30,15 +44,10 @@ export function ChooseAccount({
   const onChooseAccount = useCallback(
     (account: EnrichedAccount) => {
       setAccount(account)
-    },
-    [setAccount],
-  )
-
-  const onGoCoupon = useCallback(() => {
-    if (currentAccount) {
       setStep(Step.Coupon)
-    }
-  }, [currentAccount, setStep])
+    },
+    [setAccount, setStep],
+  )
 
   useEffect(() => {
     getAccounts()
@@ -56,28 +65,26 @@ export function ChooseAccount({
         <h4 className="subtitle">Who call contract & receive funds</h4>
       </div>
 
-      <div className="accounts-list">
-        {accounts.map(account => {
-          const active = currentAccount && currentAccount.address === account.address
+      {!!accounts.length && (
+        <div className="accounts-list">
+          {accounts.map(account => {
+            const active = currentAccount && currentAccount.address === account.address
+            const disabled = account.balance.isZero()
 
-          return (
-            <Account
-              onClick={onChooseAccount}
-              key={account.address}
-              active={active}
-              {...account}
-            />
-          )
-        })}
-      </div>
+            return (
+              <Account
+                onClick={onChooseAccount}
+                key={account.address}
+                disabled={disabled}
+                active={active}
+                {...account}
+              />
+            )
+          })}
+        </div>
+      )}
 
       {error && <div className="error message">{error}</div>}
-
-      {currentAccount && (
-        <button className="button glow" onClick={onGoCoupon}>
-          Continue
-        </button>
-      )}
     </motion.div>
   )
 }

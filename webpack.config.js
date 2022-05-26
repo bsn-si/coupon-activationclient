@@ -1,4 +1,5 @@
 /* eslint-disable */
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin")
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
 const ReactRefreshTypeScript = require("react-refresh-typescript")
@@ -8,8 +9,9 @@ const webpack = require("webpack")
 const path = require("path")
 
 require("dotenv").config()
+const { env } = process
 
-module.exports = (env) => {
+module.exports = () => {
   const isDevelopment = env.NODE_ENV === "development"
   const isProduction = env.NODE_ENV === "production"
 
@@ -87,22 +89,18 @@ module.exports = (env) => {
 
     experiments: {
       asyncWebAssembly: true,
-      lazyCompilation: true,
       syncWebAssembly: true,
-      topLevelAwait: true,
-      outputModule: true,
-      layers: true,
     },
   
     plugins: [
       isDevelopment && new ReactRefreshWebpackPlugin(),
+      // new BundleAnalyzerPlugin(),
       new MiniCssExtractPlugin({ filename: "[name].bundle.css", chunkFilename: "[id].css" }),
-      new HtmlWebpackPlugin({ title: "Invoicer", template: "./src/index.html" }),
+      new HtmlWebpackPlugin({ title: "Ocex Activation Client", template: "./src/index.html" }),
       new ForkTsCheckerWebpackPlugin(),
       new webpack.DefinePlugin({
         "process.env.RPC_URL": JSON.stringify(process.env.RPC_URL),
         "process.env.CONTRACT": JSON.stringify(process.env.CONTRACT),
-        "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
       }),
     ].filter(Boolean),
   })

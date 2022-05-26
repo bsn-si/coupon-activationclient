@@ -139,6 +139,7 @@ body {
 /* Error Alert */
 .error.message {
   background-color: #E53935;
+  white-space: pre-line;
   padding: 12px 14px;
   margin: 10px 0;
   

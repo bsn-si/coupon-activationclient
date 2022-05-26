@@ -6,16 +6,17 @@ import "./Account.css"
 
 interface Props extends EnrichedAccount {
   onClick?: (account: EnrichedAccount) => void
+  disabled?: boolean
   className?: string
   active?: boolean
 }
 
-export function Account({ active, onClick, className, ...account }: Props) {
+export function Account({ active, onClick, className, disabled, ...account }: Props) {
   const { balance, meta, address } = account
-  
+
   const itemProps = {
-    className: cx("account", className, { active }),
-    onClick: () => onClick?.(account),
+    className: cx("account", className, { active, disabled }),
+    onClick: () => !disabled && onClick?.(account),
   }
 
   return (

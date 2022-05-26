@@ -28,6 +28,10 @@
   top: 4px;
 }
 
+.account.disabled {
+  opacity: 0.5;
+}
+
 .account:hover,
 .account.active {
   background-color: rgba(0,0,0, 0.05);

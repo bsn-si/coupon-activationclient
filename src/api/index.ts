@@ -9,15 +9,16 @@ import { EnrichedAccount } from "../models"
 import { delay } from "../utils"
 
 export class API {
-  client: ApiBase<"promise"> | undefined
-  apiUrl: string
+  client?: ApiBase<"promise">
+  provider?: WsProvider
+  apiUrl?: string
 
-  constructor(apiUrl: string) {
-    this.apiUrl = `ws://${apiUrl}`
+  constructor(apiUrl?: string) {
+    this.apiUrl = apiUrl
   }
 
-  async init() {
-    const provider = new WsProvider(this.apiUrl, false)
+  async getProvider(url: string) {
+    const provider = new WsProvider(url, false)
     await provider.connect()
     await delay(100)
 
@@ -25,7 +26,25 @@ export class API {
       throw new Error(`Connect to '${this.apiUrl}' failed, try again later`)
     }
 
+    return provider
+  }
+
+  async connect(url?: string) {
+    if (url) {
+      this.apiUrl = url
+    }
+
+    if (!this.apiUrl) {
+      throw new Error("RPC url for connection required")
+    }
+
+    const provider = await this.getProvider(this.apiUrl)
+    this.provider?.disconnect()
+
     const client = await ApiPromise.create({ provider })
+
+    this.provider = provider
+    this.client = client
 
     const [chain, nodeName, nodeVersion] = await Promise.all([
       client.rpc.system.chain(),
@@ -34,11 +53,11 @@ export class API {
     ])
 
     console.log(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`)
-    this.client = client
+    return this.client
   }
 
   async requestAccess() {
-    await web3Enable("ocex")
+    return web3Enable("ocex")
   }
 
   async accounts(): Promise<EnrichedAccount[]> {
@@ -80,7 +99,7 @@ export class API {
     const { signer } = await web3FromAddress(receiver)
     const contract = await Ocex.fromAddress(this.client, [receiver, signer], address)
     contract.get_coupon_signature = get_coupon_signature
-    
+
     const coupon = new Coupon(couponSecret)
     const result = await contract.activateCoupon(coupon, receiver)
 

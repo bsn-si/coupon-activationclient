@@ -5,10 +5,6 @@
   display: flex;
 }
 
-.step.choose-account .button {
-  margin-top: 10px;
-}
-
 .step.choose-account .accounts-list {
   background-color: #fff;
   border-radius: 10px;

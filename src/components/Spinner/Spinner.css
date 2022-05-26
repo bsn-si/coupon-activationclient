@@ -1,8 +1,10 @@
 .spinner {
-  position: relative
+  position: relative;
+  height: 100px;
+  width: 100px;
 }
 
-.spinner::before, .spinner::after{
+.spinner::before, .spinner::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -13,22 +15,22 @@
   transform: translate(-50%, -50%) scale(0);
 }
 
-.spinner::before{
-  background: #8BC34A;
-  animation: pulse2 2s ease-in-out infinite;
+.spinner::before {
+  background: #E91E63;
+  animation: pulse 2s ease-in-out infinite;
 }
 
-.spinner::after{
-  background: #8BC34A;
-  animation: pulse2 2s 1s ease-in-out infinite;
+.spinner::after {
+  background: #E91E63;
+  animation: pulse 2s 1s ease-in-out infinite;
 }
 
-@keyframes pulse2{
-  0%, 100%{
+@keyframes pulse {
+  0%, 100% {
     transform: translate(-50%, -50%) scale(0);
     opacity: 1;
   }
-  50%{
+  50% {
     transform: translate(-50%, -50%) scale(1.0);
     opacity: 0;
   }
