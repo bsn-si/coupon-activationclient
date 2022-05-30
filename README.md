@@ -46,4 +46,4 @@ CONTRACT=<contract address hex or ss58>
 ```
 
 ## License
-[Apache License 2.0](https://choosealicense.com/licenses/apache-2.0/) © Bela Supernova ([bsn.si](https://bsn.si))
+[Apache License 2.0](https://github.com/bsn-si/ocex-activation/blob/main/license) © Bela Supernova ([bsn.si](https://bsn.si))
