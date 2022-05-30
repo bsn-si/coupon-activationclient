@@ -10,11 +10,11 @@
 OCEX coupon activation DApp.
 
 ## Features
-DApp can interact with custom RPC and contracts and use polkadot.js extensions for sign transactions.
+DApp can interact with custom RPC and contracts and use polkadot.js extensions to sign transactions.
 - You can configure target RPC url.
 - Select accounts from your extension to receive funds.
 - Set target contract instance address.
-- Sign & send activation via rpc to the contract
+- Sign & send activation via RPC to the contract
 
 ## Simple usage
 Current version of dapp:
@@ -36,10 +36,10 @@ yarn start
 yarn build
 ```
 
-Also you can preset RPC url and contract address from `.env` before build.  
+Also you can preset RPC URL and contract address from `.env` before build.  
 
 ```
-# You can preset rpc node url
+# You can preset RPC node URL
 RPC_URL=ws://127.0.0.1:9944
 # You can preset contract address
 CONTRACT=<contract address hex or ss58>
