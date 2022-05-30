@@ -1,3 +1,4 @@
+## Disclaimer
 > 💀 This is a **Work in Progress**.  
 > Current status: Common PoC data storage and methods available. Partially tested.   
 > **Use at your own risk**.
@@ -6,18 +7,17 @@
     🎟️ ✨ OCEX Activation Client 🎁 👛
 </h1>
 
-OCEX coupon activation DApp for interact with smartcontract.
+OCEX coupon activation DApp.
 
 ## Features
-DApp can interact with custom RPC and contracts, and use polkadot.js extensions for sign transactions.
+DApp can interact with custom RPC and contracts and use polkadot.js extensions for sign transactions.
 - You can configure target RPC url.
-- Select accounts from you extension for receive funds.
-- Set target contract instancce address.
-- Sign & send activation via rpc to contract
+- Select accounts from your extension to receive funds.
+- Set target contract instance address.
+- Sign & send activation via rpc to the contract
 
 ## Simple usage
-You can visit current version of dapp, and try it out.
-
+Current version of dapp:
 [Run DApp](https://bsn-si.github.io/ocex-activation/) 
 
 ## Build & Run
