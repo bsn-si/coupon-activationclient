@@ -44,6 +44,11 @@ RPC_URL=ws://127.0.0.1:9944
 # You can preset contract address
 CONTRACT=<contract address hex or ss58>
 ```
+## Related repos
+- OCEX [Ink! smart contract](https://github.com/bsn-si/ocex-smartcontract)
+- OCEX smart contract [API client](https://github.com/bsn-si/ocex-api)
+- OCEX [CLI management tool](https://github.com/bsn-si/ocex-cli)
+- JS/Wasm [library](https://github.com/bsn-si/ocex-coupon-signature) for coupon activation signatures
 
 ## License
 [Apache License 2.0](https://github.com/bsn-si/ocex-activation/blob/main/license) © Bela Supernova ([bsn.si](https://bsn.si))
